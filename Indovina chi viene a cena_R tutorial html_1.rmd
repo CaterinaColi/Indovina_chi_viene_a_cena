@@ -1,0 +1,77 @@
+---
+title: "Indovina chi viene a cena"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Possibili invitati
+
+```{r}
+
+Gianna = list("sesso"= "F","anni"= 60, "nazionalità" ="italiana", "vacanze" = "mare","vuole_viaggiare"=T)
+Mauro = list("sesso"= "M", "anni"= 29,"nazionalità" ="brasiliana", "vacanze" = "montagna","vuole_viaggiare"=F)
+Beatrice = list("sesso"= "F","anni"= 28, "nazionalità" ="spagnola", "vacanze" = "lago","vuole_viaggiare"=T)
+Lina = list("sesso"= "F","anni"= 28, "nazionalità" ="francese", "vacanze" = "città","vuole_viaggiare"=T)
+Roberto = list("sesso"= "F","anni"= 28, "nazionalità" ="portoghese", "vacanze" = "mare","vuole_viaggiare"=T)
+
+print(Gianna)
+```
+
+
+## Lista di invitati
+```{r}
+candidati = list("Gianna" = Gianna,"Mauro"=Mauro,"Beatrice"=Beatrice, "Lina"=Lina,"Roberto"=Roberto)
+print(candidati)
+```
+
+## Scegliete il vostro candidato ideale
+
+```{r}
+candidato_ideale = list(
+"sesso" = c("F","M"),
+"anni"= c(27:50),
+"nazionalità"= c("italiana","spagnola","portoghese"),
+"vacanze" = c("mare","lago"))
+
+print(candidato_ideale)
+```
+
+## Script che ci aiuta a scegliere il nostro invitato
+
+```{r}
+invitati <- c()
+for(candidato in 1:length(candidati)){
+  if(candidati[[candidato]][['sesso']] %in% candidato_ideale$sesso){
+    if(candidati[[candidato]][['anni']] %in% candidato_ideale$anni){
+      if(candidati[[candidato]][['nazionalità']] %in% candidato_ideale$nazionalità){
+        if(candidati[[candidato]][['vacanze']] %in% candidato_ideale$vacanze){
+          
+          print(names(candidati[candidato]))
+          invitati <- c(invitati,(names(candidati[candidato])))
+          
+        }
+      }
+    }
+
+    
+  }
+          
+}
+          
+
+print(invitati)
+ 
+```
+## Grafico a torta delle persone che verranno invitate a cena
+
+
+```{r}
+
+pie(rep(1,length(invitati)), invitati,col = rainbow(5))
+
+```
